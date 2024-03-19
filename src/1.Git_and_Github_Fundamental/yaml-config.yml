@@ -3,3 +3,23 @@ my-course: "MLOPs Certification"
 version: 1.0
 is_public: true
 release_date: 2024-03-20
+pre_enroll: null
+category:
+  - Certificate
+  - Knowledge
+  - MLOps
+course_dev: ["mdattr"]
+dev_details:
+  - name: "mdattr"
+    email: "dattruongg1311@gmail.com"
+    role: "author"
+  - { name: "mdattr", email: "truongminhdat07@gmailmcom", role: "author" }
+short_description: >
+  The course focuses on the principles and practices to get
+  Certification
+  in Machine Learning Operations (MLOps
+  ). It provides an overview of MLOps
+  concepts, tools, methodologies, and best practices for deploying machine learning models at scale.
+detailed_description: |
+  ## Course Outline
+  * Introduction to MLOps
