@@ -1,0 +1,5 @@
+# This is a YAML file
+my-course: "MLOPs Certification"
+version: 1.0
+is_public: true
+release_date: 2024-03-20
