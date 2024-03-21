@@ -26,7 +26,7 @@ class ModelImputer(BaseEstimator, TransformerMixin):
     def fit(self, X, y=None):
         self.model_dict = {}
         for col in self.variables:
-            self.model_dict[col] = X[col].model()[0]
+            self.model_dict[col] = X[col].mode()[0]
         return self
 
     def transform(self, X):
@@ -59,7 +59,8 @@ class DomainProcessing(BaseEstimator, TransformerMixin):
 
     def transform(self, X):
         X = X.copy()
-        X[self.variable_to_modify] = X[self.variable_to_modify] + X[self.variable_to_add]
+        for feature in self.variable_to_modify:
+            X[feature] = X[feature] + X[self.variable_to_add]
         return X
 
 
@@ -85,8 +86,8 @@ class LogTransformation(BaseEstimator, TransformerMixin):
     def __init__(self,variables=None):
         self.variables = variables
     
-    def fit(self,X):
-        return X
+    def fit(self,X,y=None):
+        return self
     
     def transform(self,X):
         X = X.copy()
