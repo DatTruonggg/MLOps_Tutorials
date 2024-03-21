@@ -50,18 +50,16 @@ class DropColumn(BaseEstimator, TransformerMixin):
 
 
 class DomainProcessing(BaseEstimator, TransformerMixin):
-    def __init__(self, variable_to_modify=None, reference_variable=None):
+    def __init__(self, variable_to_modify=None, variable_to_add=None):
         self.variable_to_modify = variable_to_modify
-        self.reference_variable = reference_variable
+        self.variable_to_add = variable_to_add
 
     def fit(self, X, y=None):
         return self
 
     def transform(self, X):
         X = X.copy()
-        X = X.drop(columns=self.variables)
-        X[self.variable_to_modify] = X[self.variable_to_modify] + \
-            X[self.reference_variable]
+        X[self.variable_to_modify] = X[self.variable_to_modify] + X[self.variable_to_add]
         return X
 
 
