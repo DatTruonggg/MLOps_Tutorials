@@ -18,6 +18,3 @@ def test_single_pred_str_type(single_prediction):
 
 def test_single_pred_validation(single_prediction):
     assert single_prediction.get('prediction')[0] == "Y"
-
-if __name__ == "__main__":
-    single_prediction()
