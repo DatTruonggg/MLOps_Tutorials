@@ -6,12 +6,12 @@ from prediction_model.processing.data_handling import load_pipeline, load_datase
 
 classification_pipeline = load_pipeline(config.MODEL_NAME)
 
-def generate_predictions():
+def generate_predictions(data_input):
     data = load_dataset(config.TEST_FILE)
     pred = classification_pipeline.predict(data[config.FEATURE])
     output = np.where(pred==1,'Y','N')
     result = {"prediction":output}
-    return output
+    return result
 
-if __name__ == "__main__":
-    generate_predictions()
+# if __name__ == "__main__":
+#     generate_predictions()
