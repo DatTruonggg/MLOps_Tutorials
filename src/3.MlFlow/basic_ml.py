@@ -15,6 +15,7 @@ def load_data():
         return df
     except Exception as e:
         raise e
+    
 def eval_function(actual, pred):
     rmse = mean_squared_error(actual, pred, squared=False)
     mae = mean_absolute_error(actual, pred)
@@ -30,8 +31,8 @@ def main(alpha, l1_ratio):
     
     mlflow.set_experiment("ML-Model-1")
     with mlflow.start_run():
-        mlflow.log_param("alpha,", alpha)
-        mlflow.log_artifact("l1_ratio", l1_ratio)
+        mlflow.log_param("alpha", alpha)
+        mlflow.log_param("l1_ratio", l1_ratio)
 
         model = ElasticNet(alpha=alpha, l1_ratio=l1_ratio, random_state=6)
         model.fit(X_train, y_train)
@@ -40,14 +41,13 @@ def main(alpha, l1_ratio):
 
         mlflow.log_metric("rmse", rmse)
         mlflow.log_metric("mae", mae)
-        mlflow.log_metric("r2", r2)
+        mlflow.log_metric("r2-score", r2)
         mlflow.sklearn.log_model(model, "trained_model")
-        
+
 
 if __name__ == '__main__':
     args = argparse.ArgumentParser()
-    args.add_argument('--alpha', '-a', type=float, default=0.2)
-    args.add_argument('--l1_ratio', '-l1', type=float, default=0.3)
+    args.add_argument("--alpha", "-a", type=float, default=0.2)
+    args.add_argument("--l1_ratio", "-l1", type=float, default=0.3)
     parsed_args = args.parse_args()
-    # parsed_args.param1
     main(parsed_args.alpha, parsed_args.l1_ratio)
