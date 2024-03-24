@@ -25,7 +25,7 @@ for col in numerical_cols:
 dataset[numerical_cols] = dataset[numerical_cols].apply(lambda x: x.clip(*x.quantile([0.05, 0.95])))
 
 dataset["LoanAmount"] = np.log(dataset["LoanAmount"]).copy()
-dataset["TotalIncome"] = dataset["App;icantIncome"] + dataset["CoapplicantIncome"]
+dataset["TotalIncome"] = dataset["ApplicantIncome"] + dataset["CoapplicantIncome"]
 dataset["TotalIncome"] = np.log(dataset["TotalIncome"]).copy()
 
 dataset = dataset.drop(columns = ["ApplicantIncome", "CoapplicantIncome"])
@@ -55,16 +55,16 @@ grid_forest = GridSearchCV(
     param_grid=param_grid_forest,
     cv=5,
     n_jobs=-1,
-    scoring="accủacy",
+    scoring="accuracy",
     verbose=0
 )
-model_forest = grid_forest.fit(X_train, y_test)
+model_forest = grid_forest.fit(X_train, y_train)
 
 lr = LogisticRegression(random_state=RANDOM_SEED)
 param_grid_log = {
     "C": [100,10,1.0,0.1,0.01],
     "penalty": ["l1", "l2"],
-    "sovler": ["liblinear"]
+    "solver": ["liblinear"]
 }
 
 grid_log = GridSearchCV(
@@ -92,7 +92,7 @@ grid_tree = GridSearchCV(
     verbose=0,
 )
 
-model_tree = grid_tree.git(X_train, y_train)
+model_tree = grid_tree.fit(X_train, y_train)
 
 mlflow.set_experiment("Loan_prediction")
 
