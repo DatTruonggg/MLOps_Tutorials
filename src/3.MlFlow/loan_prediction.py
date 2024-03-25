@@ -10,7 +10,7 @@ import os
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import LabelEncoder
 
-mlflow.set_tracking_uri("http://0.0.0.0:5001")
+mlflow.set_tracking_uri("http://0.0.0.0:5001/")
 dataset = pd.read_csv("train.csv")
 numerical_cols = dataset.select_dtypes(
     include=["int64", "float64"]).columns.tolist()
@@ -123,7 +123,7 @@ def eval_metrics(actual, pred):
 
 def mlflow_logging(model, X, y, name):
     with mlflow.start_run() as run:
-        mlflow.set_tracking_uri("http://0.0.0.0:5001")
+        mlflow.set_tracking_uri("http://0.0.0.0:5001/")
         run_id = run.info.run_id
         mlflow.set_tag("run_id", run_id)
         pred = model.predict(X)
