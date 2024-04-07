@@ -1,10 +1,12 @@
 import joblib 
 import streamlit as st
 import numpy as np
+import wget
 
 model_name = "RF_Loan_model.joblib"
+file_url = "https://raw.githubusercontent.com/DatTruonggg/MLOps_Tutorials/main/src/6.Streamlit/RF_Loan_model.joblib"
+wget.download(file_url)
 model = joblib.load(model_name)
-
 
 def prediction(Gender, Married, Dependents, Education, Employed,
                             ApplicantIncome, CoapplicantIncome, LoanAmount,
